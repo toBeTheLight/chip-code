@@ -10,73 +10,177 @@ html,
 body {
 	overflow: hidden;
 	perspective: 1200px;
-	perspective-origin: top right 200px;
+	perspective-origin: top right;
 }
 
 .wrap {
 	position: relative;
+	transition: all 2s;
 	width: 200px;
 	height: 200px;
 	left: 45%;
 	top: 35%;
-}
-
-#cube4-container {
-	width: 100px;
-	height: 100px;
-	position: relative;
 	transform-style: preserve-3d;
 }
-
-body:hover #cube4-container {
+.cube-container{
 	transition: all 2s;
-	transform-origin: 50% -300px 0px;
-	transform: rotateY(360deg);
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	transform-style: preserve-3d;
+}
+/*初始背侧cube*/
+/*左上*/
+#cube3-container {
+	top: 0;
+	left: 0;
+	transform-origin: right bottom 0;
+}
+/*右上*/
+#cube4-container {
+	top: 0;
+	left: 100px;
+	transform-origin: left bottom 0;
+}
+/*/左下*/
+#cube7-container {
+	top: 100px;
+	left: 0;
+	transform-origin: right top 0;
+}
+/*右下*/
+#cube8-container {
+	top: 100px;
+	left: 100px;
+	transform-origin: left top 0;
+}
+.wrap:hover{
+	transform-origin: center;
+	transform: rotateX(90deg);
+}
+.wrap:hover #cube3-container{
+	transform: rotateZ(190deg);
+}
+.wrap:hover #cube4-container{
+	transform: rotateZ(190deg);
+}
+.wrap:hover #cube7-container{
+	transform: rotateZ(190deg);
+}
+.wrap:hover #cube8-container{
+	transform: rotateZ(190deg);
+}
+/*初始正侧cube*/
+#cube1-container{
+	top: 0;
+	left: 0;
+	transform-origin: right bottom 0;
+}
+#cube2-container{
+	top: 0;
+	left: 100px;
+	transform-origin: left bottom 0;
+}
+#cube5-container{
+	top: 100px;
+	left: 0;
+	transform-origin: right top 0;
+}
+#cube6-container{
+	top: 100px;
+	left: 100px;
+	transform-origin: left top 0;
 }
 
 .cube {
+	border:1px solid black;
 	position: absolute;
 	box-sizing: border-box;
-	width: 100px;
-	height: 100px;
+	width: 99px;
+	height: 99px;
 	border-radius: 3px;
 }
-
-.cube4 {
+.wrap:hover #cube1-container{
+	
+	transform: rotateZ(-170deg);
+}
+.wrap:hover #cube2-container{
+	transform: rotateZ(-170deg);
+}
+.wrap:hover #cube5-container{
+	transform: rotateZ(-170deg);
+}
+.wrap:hover #cube6-container{
+	transform: rotateZ(-170deg);
+}
+.cube-back {
+	/*border-radius: 1px;
 	top: 0%;
-	left: 100%;
+	left: 0%;*/
 	/*opacity: .9;*/
 }
-
-.cube4.face {
+/*初始正面块各面布局*/
+.cube-back.face {
 	background-color: black;
 }
 
-.cube4.back {
+.cube-back.back {
 	background-color: deepskyblue;
 	transform: translateZ(-100px);
 }
 
-.cube4.left {
+.cube-back.left {
 	background-color: yellow;
 	transform-origin: left;
 	transform: rotateY(-270deg);
 }
 
-.cube4.right {
+.cube-back.right {
 	background-color: green;
 	transform-origin: right;
 	transform: rotateY(270deg);
 }
 
-.cube4.top {
+.cube-back.top {
 	background-color: orange;
 	transform-origin: top;
 	transform: rotateX(-90deg);
 }
 
-.cube4.bottom {
+.cube-back.bottom {
 	background-color: deeppink;
 	transform-origin: bottom;
 	transform: rotateX(-270deg);
+}
+/*初始正面块各面布局*/
+.cube-face.face {
+	background-color: deepskyblue;
+	transform: translateZ(100px);
+}
+.cube-face.back {
+	background-color: black;
+}
+
+.cube-face.left {
+	background-color: yellow;
+	transform-origin: left;
+	transform: rotateY(270deg);
+}
+
+.cube-face.right {
+	background-color: green;
+	transform-origin: right;
+	transform: rotateY(90deg);
+}
+
+.cube-face.top {
+	background-color: orange;
+	transform-origin: top;
+	transform: rotateX(90deg);
+}
+
+.cube-face.bottom {
+	background-color: deeppink;
+	transform-origin: bottom;
+	transform: rotateX(270deg);
 }

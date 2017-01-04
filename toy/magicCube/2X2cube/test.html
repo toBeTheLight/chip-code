@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#testDiv{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="testDiv">
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="js/tools.js"></script>
+	<script type="text/javascript">
+		var elTest = document.getElementById('testDiv');
+		console.log(elTest);
+		elTest.transform('translate',400);
+	</script>
+</html>

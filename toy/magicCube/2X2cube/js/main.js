@@ -9,4 +9,21 @@ function elWrapPosition() {
 }
 window.addEventListener('resize', elWrapPosition, false)
 elWrapPosition();
+
 //右键旋转wrap
+let elBody = document.body;
+let startX,startY;
+elBody.addEventListener('mousedown',function(ev){
+	let e = ev||event;
+	startX = e.clientX;
+	startY = e.clientY;
+	elBody.addEventListener('mousemove',rotateWrap,false);
+},false);
+function rotateWrap(ev){
+	let e = ev||event;
+	let nowX = e.clientX;
+	let nowY = e.clientY;
+	let moveX = nowX - startX;
+	let moveY = nowY - startY;
+	//做角度转换
+}

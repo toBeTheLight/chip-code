@@ -15,7 +15,7 @@ body {
 
 .wrap {
 	position: relative;
-	transition: all 2s;
+	/*transition: all 2s;*/
 	width: 200px;
 	height: 200px;
 	left: 45%;

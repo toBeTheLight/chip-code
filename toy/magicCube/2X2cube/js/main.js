@@ -29,9 +29,9 @@ function rotateWrap(ev){
 	startX = nowX;
 	startY = nowY;
 	//做角度转换
-	let rotateY = moveX*2,
-	rotateX = -moveY*2;
-	console.log(elWrap.transformTool('rotate'))
+	let rotateY = moveX/2,
+	rotateX = -moveY/2;
+	console.log(elWrap.transformTool('rotateX'))
 	elWrap.transformTool('rotateY',rotateY+elWrap.transformTool('rotateY'));
 	elWrap.transformTool('rotateX',rotateX+elWrap.transformTool('rotateX'));
 	

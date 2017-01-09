@@ -54,7 +54,7 @@ body {
 	left: 100px;
 	transform-origin: left top 0;
 }
-.wrap:hover{
+/*.wrap:hover{
 	transform-origin: center;
 	transform: rotateX(90deg);
 }
@@ -69,7 +69,7 @@ body {
 }
 .wrap:hover #cube8-container{
 	transform: rotateZ(190deg);
-}
+}*/
 /*初始正侧cube*/
 #cube1-container{
 	top: 0;
@@ -100,8 +100,7 @@ body {
 	height: 99px;
 	border-radius: 3px;
 }
-.wrap:hover #cube1-container{
-	
+/*.wrap:hover #cube1-container{
 	transform: rotateZ(-170deg);
 }
 .wrap:hover #cube2-container{
@@ -112,7 +111,7 @@ body {
 }
 .wrap:hover #cube6-container{
 	transform: rotateZ(-170deg);
-}
+}*/
 .cube-back {
 	/*border-radius: 1px;
 	top: 0%;
@@ -125,7 +124,7 @@ body {
 }
 
 .cube-back.back {
-	background-color: deepskyblue;
+	background-color: silver;
 	transform: translateZ(-100px);
 }
 

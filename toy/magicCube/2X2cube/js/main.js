@@ -34,5 +34,6 @@ function rotateWrap(ev){
 	console.log(elWrap.transformTool('rotateX'))
 	elWrap.transformTool('rotateY',rotateY+elWrap.transformTool('rotateY'));
 	elWrap.transformTool('rotateX',rotateX+elWrap.transformTool('rotateX'));
+	console.log(elWrap.transformTool('rotateX'),elWrap.transformTool('rotateY'))
 	
 }

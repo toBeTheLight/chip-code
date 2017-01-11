@@ -27,6 +27,9 @@ Element.prototype.transformTool = function(type, number) {
 		let tempObj = this.transformObj[tempType];
 		transformStr += ' ' + tempType + '(' + tempObj.value + tempObj.unit +')';
 	}
+	
+//	transformStr = 'rotateX'
+	
 	//进行完整样式设置
 	this.style.transform = transformStr;
 	}

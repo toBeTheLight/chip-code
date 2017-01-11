@@ -21,6 +21,7 @@ body {
 	left: 45%;
 	top: 35%;
 	transform-style: preserve-3d;
+	transform: rotateY(-90deg) rotateZ(45deg) ;
 }
 .cube-container{
 	transition: all 2s;

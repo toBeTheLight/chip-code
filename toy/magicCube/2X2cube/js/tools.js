@@ -1,9 +1,15 @@
 'use strict'
+//transformTool使用说明：
+//未传入参数则返回保存对象
+//传入一个参数为获取对应值
+//传入两个参数为设置对应值
 Element.prototype.transformTool = function(type, number) {
 	//初次调用，对对象添加数据保存对象
 	if(this.transformObj === undefined) this.transformObj = {};
+	if(type === undefined){
+		return this.transformObj;
 	//未传入number参数，则按照查询处理
-	if(number === undefined) {
+	}else if(number === undefined) {
 		//对应变换类型不存在，直接返回0
 		if(this.transformObj[type]===undefined){
 			return 0
@@ -27,9 +33,6 @@ Element.prototype.transformTool = function(type, number) {
 		let tempObj = this.transformObj[tempType];
 		transformStr += ' ' + tempType + '(' + tempObj.value + tempObj.unit +')';
 	}
-	
-//	transformStr = 'rotateX'
-	
 	//进行完整样式设置
 	this.style.transform = transformStr;
 	}

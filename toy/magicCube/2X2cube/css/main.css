@@ -15,13 +15,12 @@ body {
 
 .wrap {
 	position: relative;
-	/*transition: all 2s;*/
 	width: 200px;
 	height: 200px;
 	left: 45%;
 	top: 35%;
 	transform-style: preserve-3d;
-	transform: rotateY(-90deg) rotateZ(45deg) ;
+	transition: all 0.3s;
 }
 .cube-container{
 	transition: all 2s;

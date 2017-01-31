@@ -1,26 +1,36 @@
 'use strict'
-let elWrap = document.getElementsByClassName('wrap')[0];
+//let elWrap = document.getElementsByClassName('wrap')[0];
+let elWrap = $my('wrap')
 //wrap位置修正
 function elWrapPosition() {
-	elWrap.style.transitionDuration = '0s';
-	console.log(elWrap.style.transitionDuration)
+	elWrap.css('transitionDuration','0s');
+	console.log(elWrap.doms[0].style.transitionDuration)
 	let elWrapLeft = document.body.clientWidth / 2 - 100,
 	elWrapTop = document.body.clientHeight / 2 - 100,
 	elWrapPositionText = 'left:' + elWrapLeft + 'px;top:' + elWrapTop + 'px';
 //	elWrap.setAttribute('style', elWrapPositionText);
-	elWrap.style.left = elWrapLeft + 'px';
-	elWrap.style.top = elWrapTop + 'px';
+	elWrap.css('left',elWrapLeft + 'px');
+	elWrap.css('top', elWrapTop + 'px');
 }
 window.addEventListener('resize', elWrapPosition, false)
 elWrapPosition();
 //初始化颜色对象
-let colorObj = {
-	
+let colorOfX = {
+	face:'deepskyblue',
+	right:'green',
+	back:'silver',
+	left:'yellow'
+}
+let colorOfY = {
+	face:'deepskyblue',
+	top:'orange',
+	back:'silver',
+	bottom:'deeppink'
 }
 //键盘事件，固定角度旋转
 let rotateWrap = (ev)=>{
 	//恢复transition效果
-	elWrap.style.transition = 'all 0.3s';
+	elWrap.css('transition','all 0.3s');
 	let e = ev || event;
 	let x = 0,y = 0;
 	switch (e.keyCode){
@@ -47,6 +57,7 @@ let rotateWrap = (ev)=>{
 	}
 	elWrap.transformTool('rotateX', x + elWrap.transformTool('rotateX'));
 	elWrap.transformTool('rotateY', y + elWrap.transformTool('rotateY'));
+	
 }
 
 window.addEventListener('keyup',rotateWrap,false);

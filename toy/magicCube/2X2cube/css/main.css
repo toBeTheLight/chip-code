@@ -118,8 +118,8 @@ body {
 	left: 0%;*/
 	/*opacity: .9;*/
 }
-/*初始正面块各面布局*/
-.cube-back.face {
+/*初始被面块各面css*/
+.cube-back.inside {
 	background-color: black;
 }
 
@@ -151,12 +151,12 @@ body {
 	transform-origin: bottom;
 	transform: rotateX(-270deg);
 }
-/*初始正面块各面布局*/
+/*初始正面块各面css*/
 .cube-face.face {
 	background-color: deepskyblue;
 	transform: translateZ(100px);
 }
-.cube-face.back {
+.cube-face.inside {
 	background-color: black;
 }
 

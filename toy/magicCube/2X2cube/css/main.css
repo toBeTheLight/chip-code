@@ -23,7 +23,7 @@ body {
 	transition: all 0.3s;
 }
 .cube-container{
-	transition: all 2s;
+	transition: all .3s;
 	width: 100px;
 	height: 100px;
 	position: absolute;
@@ -31,25 +31,25 @@ body {
 }
 /*初始背侧cube*/
 /*左上*/
-#cube3-container {
+#cubeBTL {
 	top: 0;
 	left: 0;
 	transform-origin: right bottom 0;
 }
 /*右上*/
-#cube4-container {
+#cubeBTR {
 	top: 0;
 	left: 100px;
 	transform-origin: left bottom 0;
 }
 /*/左下*/
-#cube7-container {
+#cubeBBL {
 	top: 100px;
 	left: 0;
 	transform-origin: right top 0;
 }
 /*右下*/
-#cube8-container {
+#cubeBBR {
 	top: 100px;
 	left: 100px;
 	transform-origin: left top 0;
@@ -58,35 +58,35 @@ body {
 	transform-origin: center;
 	transform: rotateX(90deg);
 }
-.wrap:hover #cube3-container{
+.wrap:hover #cubeBTL{
 	transform: rotateZ(190deg);
 }
-.wrap:hover #cube4-container{
+.wrap:hover #cubeBTR{
 	transform: rotateZ(190deg);
 }
-.wrap:hover #cube7-container{
+.wrap:hover #cubeBBL{
 	transform: rotateZ(190deg);
 }
-.wrap:hover #cube8-container{
+.wrap:hover #cubeBBR{
 	transform: rotateZ(190deg);
 }*/
 /*初始正侧cube*/
-#cube1-container{
+#cubeFTL{
 	top: 0;
 	left: 0;
 	transform-origin: right bottom 0;
 }
-#cube2-container{
+#cubeFTR{
 	top: 0;
 	left: 100px;
 	transform-origin: left bottom 0;
 }
-#cube5-container{
+#cubeFBL{
 	top: 100px;
 	left: 0;
 	transform-origin: right top 0;
 }
-#cube6-container{
+#cubeFBR{
 	top: 100px;
 	left: 100px;
 	transform-origin: left top 0;
@@ -100,16 +100,16 @@ body {
 	height: 99px;
 	border-radius: 3px;
 }
-/*.wrap:hover #cube1-container{
+/*.wrap:hover #cubeFTL{
 	transform: rotateZ(-170deg);
 }
-.wrap:hover #cube2-container{
+.wrap:hover #cubeFTR{
 	transform: rotateZ(-170deg);
 }
-.wrap:hover #cube5-container{
+.wrap:hover #cubeFBL{
 	transform: rotateZ(-170deg);
 }
-.wrap:hover #cube6-container{
+.wrap:hover #cubeFBR{
 	transform: rotateZ(-170deg);
 }*/
 .cube-back {

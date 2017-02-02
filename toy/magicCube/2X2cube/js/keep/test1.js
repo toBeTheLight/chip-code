@@ -1,4 +1,4 @@
-//弃用方法1部分js
+﻿//已弃用方法1部分js
 elWrap.transformTool();
 //	根据已有角度/90并模4简化确定现方向
 let nX = (elWrap.transformTool('rotateX') / 90) % 4;

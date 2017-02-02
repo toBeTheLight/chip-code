@@ -20,7 +20,10 @@ body {
 	left: 45%;
 	top: 35%;
 	transform-style: preserve-3d;
-	transition: all 0.3s;
+	/*transition: all 2.0s!important;*/
+}
+.wrap:hover{
+	transform: rotateY(-360deg);
 }
 .cube-container{
 	transition: all .3s;
@@ -183,3 +186,12 @@ body {
 	transform-origin: bottom;
 	transform: rotateX(270deg);
 }
+//调试left back用样式
+/*.cubeBack{
+	position: absolute;
+	left: 200px;
+}
+.cubeLeft{
+	position:absolute;
+	left: -200px;
+}*/

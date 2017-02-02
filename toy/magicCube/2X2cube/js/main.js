@@ -37,65 +37,109 @@ let colorOfTemp = {
 	left: [],
 	right: []
 };
-
 //颜色转换函数
-let colorOfChange = (hashObj,index,direct,y) => {
-	if(y){
-		let temp0= colorOf.back[0];
-		let temp1= colorOf.back[1];
-		let temp2= colorOf.back[2];
-		let temp3= colorOf.back[3];
-		colorOf.back[0]=temp3;
-		colorOf.back[1]=temp2;
-		colorOf.back[2]=temp1;
-		colorOf.back[3]=temp0;
-	}
+let colorOfChange = (hashObj, index, direct, y) => {
+	let saveBack = colorOf.back;
 	colorOfTemp = JSON.parse(JSON.stringify(colorOf));
 	for(let key in hashObj) {
 		let key2 = hashObj[key];
 		if(index === undefined) {
 			for(let i = 0; i < 4; i++) {
 				colorOfTemp[key][i] = colorOf[key2][i];
-				if(key==key2){
-					if(direct =='+'){
-						colorOfTemp[key][0]=colorOf[key2][2];
-						colorOfTemp[key][1]=colorOf[key2][0];
-						colorOfTemp[key][2]=colorOf[key2][3];
-						colorOfTemp[key][3]=colorOf[key2][1];
-					}else if(direct =='-'){
-						colorOfTemp[key][0]=colorOf[key2][1];
-						colorOfTemp[key][1]=colorOf[key2][3];
-						colorOfTemp[key][2]=colorOf[key2][0];
-						colorOfTemp[key][3]=colorOf[key2][2];					
-					}			
+				if(key == key2) {
+					if(direct == '+') {
+						colorOfTemp[key][0] = colorOf[key2][2];
+						colorOfTemp[key][1] = colorOf[key2][0];
+						colorOfTemp[key][2] = colorOf[key2][3];
+						colorOfTemp[key][3] = colorOf[key2][1];
+					} else if(direct == '-') {
+						colorOfTemp[key][0] = colorOf[key2][1];
+						colorOfTemp[key][1] = colorOf[key2][3];
+						colorOfTemp[key][2] = colorOf[key2][0];
+						colorOfTemp[key][3] = colorOf[key2][2];
+					}
 				}
 			}
-			
 		} else {
-			if(key!==key2){
+			if(key !== key2) {
 				colorOfTemp[key][index[0]] = colorOf[key2][index[0]];
-				colorOfTemp[key][index[1]] = colorOf[key2][index[1]];	
-			}else if(key==key2){
-				if(direct =='+'){
-					colorOfTemp[key][0]=colorOf[key2][2];
-					colorOfTemp[key][1]=colorOf[key2][0];
-					colorOfTemp[key][2]=colorOf[key2][3];
-					colorOfTemp[key][3]=colorOf[key2][1];
-				}else if(direct =='-'){
-					colorOfTemp[key][0]=colorOf[key2][1];
-					colorOfTemp[key][1]=colorOf[key2][3];
-					colorOfTemp[key][2]=colorOf[key2][0];
-					colorOfTemp[key][3]=colorOf[key2][2];					
-				}	
+				colorOfTemp[key][index[1]] = colorOf[key2][index[1]];
+			} else if(key == key2) {
+				if(direct == '+') {
+					colorOfTemp[key][0] = colorOf[key2][2];
+					colorOfTemp[key][1] = colorOf[key2][0];
+					colorOfTemp[key][2] = colorOf[key2][3];
+					colorOfTemp[key][3] = colorOf[key2][1];
+				} else if(direct == '-') {
+					colorOfTemp[key][0] = colorOf[key2][1];
+					colorOfTemp[key][1] = colorOf[key2][3];
+					colorOfTemp[key][2] = colorOf[key2][0];
+					colorOfTemp[key][3] = colorOf[key2][2];
+				}
 			}
 		}
 	}
-			console.log(colorOf.back,colorOf.right,colorOf.face);
+	if(y && index === undefined) {
+		if(y < 0) {
+			let temp0 = colorOf.back[0];
+			let temp1 = colorOf.back[1];
+			let temp2 = colorOf.back[2];
+			let temp3 = colorOf.back[3];
+			let tempBack = [temp3, temp2, temp1, temp0];
+			colorOfTemp.right = tempBack;
+			temp0 = colorOf.left[0];
+			temp1 = colorOf.left[1];
+			temp2 = colorOf.left[2];
+			temp3 = colorOf.left[3];
+			tempBack = [temp3, temp2, temp1, temp0];
+			colorOfTemp.back = tempBack;
+		}
+		if(y > 0) {
+			let temp0 = colorOf.back[0];
+			let temp1 = colorOf.back[1];
+			let temp2 = colorOf.back[2];
+			let temp3 = colorOf.back[3];
+			let tempBack = [temp3, temp2, temp1, temp0];
+			colorOfTemp.left = tempBack;
+
+			temp0 = colorOf.right[0];
+			temp1 = colorOf.right[1];
+			temp2 = colorOf.right[2];
+			temp3 = colorOf.right[3];
+			tempBack = [temp3, temp2, temp1, temp0];
+			colorOfTemp.back = tempBack;
+		}
+	} else if(y && index.length) {
+		let hash = [3, 2, 1, 0];
+		if(y < 0) {
+			let temp0 = colorOf.back[hash[index[0]]];
+			let temp1 = colorOf.back[hash[index[1]]];
+			colorOfTemp.right[index[0]] = temp0;
+			colorOfTemp.right[index[1]] = temp1;
+
+			temp0 = colorOf.left[index[0]];
+			temp1 = colorOf.left[index[1]];
+			colorOfTemp.back = saveBack;
+			colorOfTemp.back[hash[index[0]]] = temp0;
+			colorOfTemp.back[hash[index[1]]] = temp1;
+		} else if(y > 0) {
+			let temp0 = colorOf.back[hash[index[0]]];
+			let temp1 = colorOf.back[hash[index[1]]];
+			colorOfTemp.left[index[0]] = temp0;
+			colorOfTemp.left[index[1]] = temp1;
+
+			temp0 = colorOf.right[index[0]];
+			temp1 = colorOf.right[index[1]];
+			colorOfTemp.back = saveBack;
+			colorOfTemp.back[hash[index[0]]] = temp0;
+			colorOfTemp.back[hash[index[1]]] = temp1;
+		}
+	}
 };
-//根据转动方向与index,映射转换颜色对象
-let oldColorToNew = (x,y,index,whichDelete) => {
+//根据转动方向与index,映射转换颜色对象,whichDelete参数用来保证单层旋转时无关面的无关性.
+let oldColorToNew = (x, y, index, whichDelete) => {
 	let hashObj = null;
-	let direct ='';
+	let direct = '';
 	if(x) {
 		if(x < 0) {
 			hashObj = {
@@ -106,8 +150,8 @@ let oldColorToNew = (x,y,index,whichDelete) => {
 				right: 'right',
 				left: 'left'
 			};
-			direct ='-'
-		} else if(x>0){
+			direct = '-'
+		} else if(x > 0) {
 			hashObj = {
 				face: 'bottom',
 				top: 'face',
@@ -116,7 +160,7 @@ let oldColorToNew = (x,y,index,whichDelete) => {
 				right: 'right',
 				left: 'left'
 			}
-			direct ='+';
+			direct = '+';
 		}
 	} else if(y) {
 		if(y > 0) {
@@ -128,8 +172,8 @@ let oldColorToNew = (x,y,index,whichDelete) => {
 				top: 'top',
 				bottom: 'bottom'
 			}
-			direct ='-';
-		} else if(y<0){
+			direct = '-';
+		} else if(y < 0) {
 			hashObj = {
 				face: 'right',
 				right: 'back',
@@ -138,13 +182,13 @@ let oldColorToNew = (x,y,index,whichDelete) => {
 				top: 'top',
 				bottom: 'bottom'
 			}
-			direct ='+';
+			direct = '+';
 		};
 	};
-	if(whichDelete){
-		delete hashObj[whichDelete];	
+	if(whichDelete) {
+		delete hashObj[whichDelete];
 	}
-	colorOfChange(hashObj,index,direct,y);
+	colorOfChange(hashObj, index, direct, y);
 	colorOf = JSON.parse(JSON.stringify(colorOfTemp));
 	hashObj = null;
 };
@@ -188,7 +232,7 @@ let colorOfCubeChange = (which) => {
 				y = 90;
 				break;
 		}
-		oldColorToNew(x,y)
+		oldColorToNew(x, y)
 		let rotateStr = `rotateX(${x}deg) rotateY(${y}deg)`;
 		elWrap.css('transform', rotateStr);
 		let transitionCallback = () => {
@@ -201,7 +245,6 @@ let colorOfCubeChange = (which) => {
 			elWrap.css('transition', 'all 0s');
 			elWrap.css('transform', '');
 			window.addEventListener('keyup', rotateWrap, false);
-			console.log(colorOf.back,colorOf.right,colorOf.face);
 			elWrap.doms[0].removeEventListener('transitionend', transitionCallback, false);
 		}
 		elWrap.on('transitionend', transitionCallback, false);
@@ -213,81 +256,83 @@ let colorOfCubeChange = (which) => {
 (function() {
 	let mousedownCallback = (e) => {
 		//取消默认拖拽
-		let ev = e||event; 
+		let ev = e || event;
 		ev.preventDefault();
 		let startX = ev.clientX;
 		let startY = ev.clientY;
 		let target = ev.target.getAttribute('dataIndex');
 		let nth = 0
-		let windowMouseUpCallback = (e)=>{
-			document.removeEventListener('mouseup',windowMouseUpCallback,false);
+		let windowMouseUpCallback = (e) => {
+			document.removeEventListener('mouseup', windowMouseUpCallback, false);
 			let ev = e || event;
 			let endX = ev.clientX;
 			let endY = ev.clientY;
-			let x=0,y=0,index,moveX,moveY,classKeyword,whichDelete;
-			
-			if(Math.abs(endX - startX)>Math.abs(endY - startY)){
+			let x = 0,
+				y = 0,
+				index, moveX, moveY, classKeyword, whichDelete;
+
+			if(Math.abs(endX - startX) > Math.abs(endY - startY)) {
 				//a或d
 				moveX = endX - startX;
-			}else{
+			} else {
 				//w或s
 				moveY = endY - startY;
 			}
-			if(moveX){
-				if(moveX<0){
+			if(moveX) {
+				if(moveX < 0) {
 					y = -90;
-				}else if(moveX>0){
-					y=90;
+				} else if(moveX > 0) {
+					y = 90;
 				};
-			}else if(moveY){
-				if(moveY>0){
+			} else if(moveY) {
+				if(moveY > 0) {
 					x = -90;
-				}else if(moveY<0){
+				} else if(moveY < 0) {
 					x = 90;
 				}
 			};
-			if(target == 0){
-				if(x){
-					index =[0,2];
+			if(target == 0) {
+				if(x) {
+					index = [0, 2];
 					classKeyword = 'ofLeft';
 					whichDelete = 'right';
-				}else if(y){
-					index=[0,1];
+				} else if(y) {
+					index = [0, 1];
 					classKeyword = 'ofTop';
 					whichDelete = 'bottom';
 				};
-			}else if(target == 1){
-				if(x){
-					index =[1,3];
+			} else if(target == 1) {
+				if(x) {
+					index = [1, 3];
 					classKeyword = 'ofRight';
 					whichDelete = 'left';
-				}else if(y){
-					index=[0,1];
+				} else if(y) {
+					index = [0, 1];
 					classKeyword = 'ofTop';
 					whichDelete = 'bottom';
 				};
-			}else if(target == 2){
-				if(x){
-					index =[0,2];
+			} else if(target == 2) {
+				if(x) {
+					index = [0, 2];
 					classKeyword = 'ofLeft';
 					whichDelete = 'right';
-				}else if(y){
-					index=[2,3];
+				} else if(y) {
+					index = [2, 3];
 					classKeyword = 'ofBottom';
 					whichDelete = 'top';
 				};
-			}else if(target == 3){
-				if(x){
-					index =[1,3];
+			} else if(target == 3) {
+				if(x) {
+					index = [1, 3];
 					classKeyword = 'ofRight';
 					whichDelete = 'left';
-				}else if(y){
-					index=[2,3];
+				} else if(y) {
+					index = [2, 3];
 					classKeyword = 'ofBottom';
 					whichDelete = 'top';
 				};
 			};
-			oldColorToNew(x,y,index,whichDelete);
+			oldColorToNew(x, y, index, whichDelete);
 			//开转
 			let rotateStr = `rotateX(${x}deg) rotateY(${y}deg)`;
 			let cubes = null;
@@ -298,9 +343,9 @@ let colorOfCubeChange = (which) => {
 			//将transition结束绑定至两个块上
 			let cubeFTL = document.getElementById('cubeFTL');
 			let cubeFBR = document.getElementById('cubeFBR');
-			
-			let cubesTranEndCallback = (ev)=>{
-				let e = ev||event;
+
+			let cubesTranEndCallback = (ev) => {
+				let e = ev || event;
 				e.stopPropagation();
 				colorOfCubeChange('face');
 				colorOfCubeChange('top');
@@ -310,22 +355,22 @@ let colorOfCubeChange = (which) => {
 				colorOfCubeChange('bottom');
 				cubes.css('transition', 'all 0s');
 				cubes.css('transform', '');
-				
-				cubeFTL.removeEventListener('transitionend',cubesTranEndCallback,false);
-				cubeFBR.removeEventListener('transitionend',cubesTranEndCallback,false);
+
+				cubeFTL.removeEventListener('transitionend', cubesTranEndCallback, false);
+				cubeFBR.removeEventListener('transitionend', cubesTranEndCallback, false);
 			}
-			cubeFTL.addEventListener('transitionend',cubesTranEndCallback,false);
-			cubeFBR.addEventListener('transitionend',cubesTranEndCallback,false);
+			cubeFTL.addEventListener('transitionend', cubesTranEndCallback, false);
+			cubeFBR.addEventListener('transitionend', cubesTranEndCallback, false);
 			x = 0;
 			y = 0;
 			moveX = 0;
-			moveY =0 ;
+			moveY = 0;
 			index = null;
 			classKeyword = '';
 		}
 		document.addEventListener('mouseup', windowMouseUpCallback, false);
 		return false;
 	}
-	document.addEventListener('mousedown',mousedownCallback,false);
-//	$my('cubeFace').on('mousedown', mousedownCallback, false)
+	document.addEventListener('mousedown', mousedownCallback, false);
+	//	$my('cubeFace').on('mousedown', mousedownCallback, false)
 })()

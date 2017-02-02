@@ -20,108 +20,93 @@ body {
 	left: 45%;
 	top: 35%;
 	transform-style: preserve-3d;
-	/*transition: all 2.0s!important;*/
 }
-.wrap:hover{
+
+.wrap:hover {
 	transform: rotateY(-360deg);
 }
-.cube-container{
+
+.cube-container {
 	transition: all .3s;
 	width: 100px;
 	height: 100px;
 	position: absolute;
 	transform-style: preserve-3d;
 }
+
+
 /*初始背侧cube*/
+
 /*左上*/
+
 #cubeBTL {
 	top: 0;
 	left: 0;
 	transform-origin: right bottom 0;
 }
+
 /*右上*/
+
 #cubeBTR {
 	top: 0;
 	left: 100px;
 	transform-origin: left bottom 0;
 }
-/*/左下*/
+
+/*左下*/
+
 #cubeBBL {
 	top: 100px;
 	left: 0;
 	transform-origin: right top 0;
 }
+
 /*右下*/
+
 #cubeBBR {
 	top: 100px;
 	left: 100px;
 	transform-origin: left top 0;
 }
-/*.wrap:hover{
-	transform-origin: center;
-	transform: rotateX(90deg);
-}
-.wrap:hover #cubeBTL{
-	transform: rotateZ(190deg);
-}
-.wrap:hover #cubeBTR{
-	transform: rotateZ(190deg);
-}
-.wrap:hover #cubeBBL{
-	transform: rotateZ(190deg);
-}
-.wrap:hover #cubeBBR{
-	transform: rotateZ(190deg);
-}*/
+
 /*初始正侧cube*/
-#cubeFTL{
+
+#cubeFTL {
 	top: 0;
 	left: 0;
 	transform-origin: right bottom 0;
 }
-#cubeFTR{
+
+#cubeFTR {
 	top: 0;
 	left: 100px;
 	transform-origin: left bottom 0;
 }
-#cubeFBL{
+
+#cubeFBL {
 	top: 100px;
 	left: 0;
 	transform-origin: right top 0;
 }
-#cubeFBR{
+
+#cubeFBR {
 	top: 100px;
 	left: 100px;
 	transform-origin: left top 0;
 }
 
 .cube {
-	border:1px solid black;
+	border: 1px solid black;
 	position: absolute;
 	box-sizing: border-box;
 	width: 99px;
 	height: 99px;
 	border-radius: 3px;
 }
-/*.wrap:hover #cubeFTL{
-	transform: rotateZ(-170deg);
-}
-.wrap:hover #cubeFTR{
-	transform: rotateZ(-170deg);
-}
-.wrap:hover #cubeFBL{
-	transform: rotateZ(-170deg);
-}
-.wrap:hover #cubeFBR{
-	transform: rotateZ(-170deg);
-}*/
-.cube-back {
-	/*border-radius: 1px;
-	top: 0%;
-	left: 0%;*/
-	/*opacity: .9;*/
-}
+
+
 /*初始被面块各面css*/
+
 .cube-back.inside {
 	background-color: black;
 }
@@ -154,11 +139,15 @@ body {
 	transform-origin: bottom;
 	transform: rotateX(-270deg);
 }
+
+
 /*初始正面块各面css*/
+
 .cube-face.face {
 	background-color: deepskyblue;
 	transform: translateZ(100px);
 }
+
 .cube-face.inside {
 	background-color: black;
 }
@@ -186,12 +175,3 @@ body {
 	transform-origin: bottom;
 	transform: rotateX(270deg);
 }
-//调试left back用样式
-/*.cubeBack{
-	position: absolute;
-	left: 200px;
-}
-.cubeLeft{
-	position:absolute;
-	left: -200px;
-}*/

@@ -14,6 +14,7 @@ let elWrap = $my('wrap');
 	window.addEventListener('resize', elWrapPosition, false)
 	elWrapPosition();
 })();
+
 //////////////////////////////
 //主要逻辑//
 //////////////////////////////
@@ -43,42 +44,36 @@ let colorOfChange = (hashObj, index, direct, y) => {
 	colorOfTemp = JSON.parse(JSON.stringify(colorOf));
 	for(let key in hashObj) {
 		let key2 = hashObj[key];
+		//处理自身旋转面颜色关系
+		if(key == key2) {
+			if(direct == '+') {
+				colorOfTemp[key][0] = colorOf[key2][2];
+				colorOfTemp[key][1] = colorOf[key2][0];
+				colorOfTemp[key][2] = colorOf[key2][3];
+				colorOfTemp[key][3] = colorOf[key2][1];
+			} else if(direct == '-') {
+				colorOfTemp[key][0] = colorOf[key2][1];
+				colorOfTemp[key][1] = colorOf[key2][3];
+				colorOfTemp[key][2] = colorOf[key2][0];
+				colorOfTemp[key][3] = colorOf[key2][2];
+			}
+		}
 		if(index === undefined) {
-			for(let i = 0; i < 4; i++) {
-				colorOfTemp[key][i] = colorOf[key2][i];
-				if(key == key2) {
-					if(direct == '+') {
-						colorOfTemp[key][0] = colorOf[key2][2];
-						colorOfTemp[key][1] = colorOf[key2][0];
-						colorOfTemp[key][2] = colorOf[key2][3];
-						colorOfTemp[key][3] = colorOf[key2][1];
-					} else if(direct == '-') {
-						colorOfTemp[key][0] = colorOf[key2][1];
-						colorOfTemp[key][1] = colorOf[key2][3];
-						colorOfTemp[key][2] = colorOf[key2][0];
-						colorOfTemp[key][3] = colorOf[key2][2];
-					}
+			//整体旋转
+			if(key !== key2) {
+				for(let i = 0; i < 4; i++) {
+					colorOfTemp[key][i] = colorOf[key2][i];
 				}
 			}
 		} else {
+			//单层旋转
 			if(key !== key2) {
 				colorOfTemp[key][index[0]] = colorOf[key2][index[0]];
 				colorOfTemp[key][index[1]] = colorOf[key2][index[1]];
-			} else if(key == key2) {
-				if(direct == '+') {
-					colorOfTemp[key][0] = colorOf[key2][2];
-					colorOfTemp[key][1] = colorOf[key2][0];
-					colorOfTemp[key][2] = colorOf[key2][3];
-					colorOfTemp[key][3] = colorOf[key2][1];
-				} else if(direct == '-') {
-					colorOfTemp[key][0] = colorOf[key2][1];
-					colorOfTemp[key][1] = colorOf[key2][3];
-					colorOfTemp[key][2] = colorOf[key2][0];
-					colorOfTemp[key][3] = colorOf[key2][2];
-				}
 			}
 		}
 	}
+	//处理back面顺序问题
 	if(y && index === undefined) {
 		if(y < 0) {
 			let temp0 = colorOf.back[0];
@@ -192,7 +187,7 @@ let oldColorToNew = (x, y, index, whichDelete) => {
 	colorOf = JSON.parse(JSON.stringify(colorOfTemp));
 	hashObj = null;
 };
-//36面遍历改色
+//4*6面遍历改色
 let colorOfCubeChange = (which) => {
 	//待优化
 	let newWhich = which.replace(/(^\w)/, function($0, $1) {
@@ -215,20 +210,16 @@ let colorOfCubeChange = (which) => {
 		let x = 0,
 			y = 0;
 		switch(e.keyCode) {
-			case 87:
-				//按下w 上
+			case 87://按下w 上
 				x = 90;
 				break;
-			case 83:
-				//按下s 下
+			case 83://按下s 下
 				x = -90;
 				break;
-			case 65:
-				//按下a 左
+			case 65://按下a 左
 				y = -90;
 				break;
-			case 68:
-				//按下d 右
+			case 68://按下d 右			
 				y = 90;
 				break;
 		}
@@ -258,16 +249,15 @@ let colorOfCubeChange = (which) => {
 		//取消默认拖拽
 		let ev = e || event;
 		ev.preventDefault();
-		let startX = ev.clientX;
-		let startY = ev.clientY;
+		let startX = ev.clientX,
+			startY = ev.clientY;
 		let target = ev.target.getAttribute('dataIndex');
-		let nth = 0
 		let windowMouseUpCallback = (e) => {
 			document.removeEventListener('mouseup', windowMouseUpCallback, false);
-			let ev = e || event;
-			let endX = ev.clientX;
-			let endY = ev.clientY;
-			let x = 0,
+			let ev = e || event,
+				endX = ev.clientX,
+				endY = ev.clientY,
+				x = 0,
 				y = 0,
 				index, moveX, moveY, classKeyword, whichDelete;
 
@@ -340,7 +330,7 @@ let colorOfCubeChange = (which) => {
 			cubes = $my(classKeyword);
 			cubes.css('transition', 'all .3s');
 			cubes.css('transform', rotateStr);
-			//将transition结束绑定至两个块上
+			//将transitionend绑定至对角两个块上,保证能且只能触发一次
 			let cubeFTL = document.getElementById('cubeFTL');
 			let cubeFBR = document.getElementById('cubeFBR');
 
@@ -355,7 +345,6 @@ let colorOfCubeChange = (which) => {
 				colorOfCubeChange('bottom');
 				cubes.css('transition', 'all 0s');
 				cubes.css('transform', '');
-
 				cubeFTL.removeEventListener('transitionend', cubesTranEndCallback, false);
 				cubeFBR.removeEventListener('transitionend', cubesTranEndCallback, false);
 			}
@@ -372,5 +361,4 @@ let colorOfCubeChange = (which) => {
 		return false;
 	}
 	document.addEventListener('mousedown', mousedownCallback, false);
-	//	$my('cubeFace').on('mousedown', mousedownCallback, false)
 })()

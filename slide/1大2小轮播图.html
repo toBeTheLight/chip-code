@@ -55,7 +55,7 @@
 				float: left;
 			}
 			.trans-left{
-				transition: left .5s;
+				transition: left .5s ease;
 			}
 			.no-active-content2{
 				margin-top: 16px;
@@ -98,7 +98,8 @@
 					noActive1:'yellow',
 					noActive2:'green'
 				};
-				var faSelector = '';
+				var nowFaSelector = '';
+				var writeTime = 1;
 				//
 				var $active = null,
 				$waitActive =null,
@@ -107,68 +108,90 @@
 				$waitNoActive = null;
 				$activeWrapper = null;
 				$noActiveWrapper = null;
-				//transitioning 标志
-				var transB = false;
+
 				var transS = false;
 				//将地址数据写入元素函数
-				function writerSrcInEls(faSelector){
-					$active = $('.active');
-					$waitActive = $(faSelector + ' .wait-active');
-					$noActive1 = $(faSelector + ' .no-active1');
-					$noActive2 = $(faSelector + ' .no-active2');
-					$waitNoActive = $(faSelector + ' .wait-no-active');
-					$activeWrapper = $(faSelector + ' .active-wrapper');
-					$noActiveWrapper = $(faSelector + ' .no-active-wrapper');
+				function writerSrcInEls(faSelector,init){
+					if(faSelector!==nowFaSelector||(init=='init')){
+						nowFaSelector = faSelector;
+						$active = $('.active');
+						$waitActive = $(faSelector + ' .wait-active');
+						$noActive1 = $(faSelector + ' .no-active1');
+						$noActive2 = $(faSelector + ' .no-active2');
+						$waitNoActive = $(faSelector + ' .wait-no-active');
+						$activeWrapper = $(faSelector + ' .active-wrapper');
+						$noActiveWrapper = $(faSelector + ' .no-active-wrapper');	
+					}
 					$active.css('background',srcS.active).attr('data-src',srcS.active);
 					$waitActive.css('background',srcS.noActive1);
 					$noActive1.css('background',srcS.noActive1).attr('data-src',srcS.noActive1);
 					$waitNoActive.css('background',srcS.active).attr('data-src',srcS.active);
 					$noActive2.css('background',srcS.noActive2).attr('data-src',srcS.noActive2);
+					//初始化进行transition标志更改
+					$activeWrapper.attr('transition',false);
+					$noActiveWrapper.attr('transition',false);
 				}
-				writerSrcInEls(faSelector);
+				writerSrcInEls(nowFaSelector,'init');
 
 				$noActiveWrapper.click(function(){
-					if(transB||transS){
+					if($noActiveWrapper.attr('transition')=='true'||$activeWrapper.attr('transition')=='true'){
 						return false;
 					}
 					var $this = $(this);
 					var $clickNoActive = $this.find('.no-active');
 					$waitActive.css('background',$clickNoActive.attr('data-src'));
-					moveElWrapper($this);
-					console.log(srcS);
-					changeSrc($this.find('.no-active'));
-					console.log(srcS);			
+					//点击小图wrapper,传入小图wrapper
+					console.log($this);
+					moveElWrapper({
+						$el:$this,
+						name:'left',
+						transClass:'trans-left',
+						value:'-200px',
+						initval:'0px'
+					});
+					//传入大图wrapper
+					moveElWrapper({
+						$el:$activeWrapper,
+						name:'left',
+						transClass:'trans-left',
+						value:'-400px',
+						initval:'0px'
+					});
+					changeSrc($this.find('.no-active'));		
 				})
 				
 				//点击后更新srcS数据对象
 				function changeSrc($el){
-					console.log($el);
 					var src = $el.attr('data-src');
 					srcS[$el.attr('data-index')]=srcS.active;
 					srcS.active = src;
 				}
 				//控制轮播运动与恢复
-					//传入轮播图wrapper
-				function moveElWrapper($el){
-					transS = true;
-					transB = true;
-					$el.addClass('trans-left');
-					$el.css('left','-200px');
-					$activeWrapper.addClass('trans-left');
-					$activeWrapper.css('left','-400px');
-					
-					$el.on('transitionend',function(){
-						$el.removeClass('trans-left');
-						$el.css('left',0);
-						writerSrcInEls(faSelector);
-						transS = false;
-					})
-					$activeWrapper.on('transitionend',function(){
-						$activeWrapper.removeClass('trans-left');
-						$activeWrapper.css('left',0);
-						writerSrcInEls(faSelector);
-						transB = false;
-					})
+				function moveElWrapper(obj){
+					//obj={
+					//	$el:轮播图wrapper,
+					//	name:过渡样式键
+					//	value:过渡样式值
+					//	initval:恢复样式值
+					//}
+					var $el = obj.$el;
+					var name = obj.name;
+					var transClass = obj.transClass;
+					var value = obj.value;
+					var initval = obj.initval;
+					obj.$el.attr('transition',true);
+					obj.$el.addClass(obj.transClass);
+					obj.$el.css(obj.name,obj.value);			
+
+					obj.$el.on('transitionend',function(){
+						$el.removeClass(obj.transClass);
+						console.log(obj.$el)
+						if(obj.initval!==undefined){
+							obj.$el.css(obj.name,obj.initval);							
+						}
+						writerSrcInEls(nowFaSelector);
+						obj.$el.attr('transition',false);
+					});
 				}
 			})
 		</script>

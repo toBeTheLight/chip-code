@@ -1,4 +1,3 @@
-<!--yl 2017.2.22-->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -175,17 +174,12 @@
 					//	value:过渡样式值
 					//	initval:恢复样式值
 					//}
-					var $el = obj.$el;
-					var name = obj.name;
-					var transClass = obj.transClass;
-					var value = obj.value;
-					var initval = obj.initval;
 					obj.$el.attr('transition',true);
 					obj.$el.addClass(obj.transClass);
 					obj.$el.css(obj.name,obj.value);			
 
 					obj.$el.on('transitionend',function(){
-						$el.removeClass(obj.transClass);
+						obj.$el.removeClass(obj.transClass);
 						console.log(obj.$el)
 						if(obj.initval!==undefined){
 							obj.$el.css(obj.name,obj.initval);							

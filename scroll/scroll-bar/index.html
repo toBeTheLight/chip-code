@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./scroll-bar.js"></script>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .container {
+    position: relative;
+  }
+  #wrapper {
+    border: 1px solid blue;
+    height: 200px;
+    overflow: auto;
+    position: relative;
+  }
+  #inner {
+    height: 400px;
+    background-color: aqua;
+  }
+  #scroll {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    background-color: beige;
+  }
+  #bar {
+    position: absolute;
+    background: blueviolet;
+    /* height: 10px; */
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="wrapper">
+      <div id="inner">
+        1<br/>
+        2<br/>
+        3<br/>
+        4<br/>
+        5<br/>
+        6<br/>
+        7<br/>
+        8<br/>
+        9<br/>
+        10<br/>
+        11<br/>
+        12<br/>    
+      </div>
+    </div>
+    <div id="scroll">
+      <div id="bar"></div>
+    </div>
+  </div>
+    <script>
+      scrollbar({
+        // 滚动元素
+      wrapper: '#wrapper',
+      //滚动元素内容区
+      inner: '#inner',
+      //滚动条
+      scroll: '#scroll',
+      //滚动滑块
+      bar: '#bar'
+    })
+  </script>
+</body>
+</html>

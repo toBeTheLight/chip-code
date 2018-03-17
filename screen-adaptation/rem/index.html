@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./flexible.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 1rem;
+    }
+    p {
+      box-sizing: border-box;
+      border: 1px solid black;
+      width: 10rem;
+    }
+    p {
+      font-size: 16px;
+    }
+    [data-dpr="2"] p {
+      font-size: 32px;
+    }
+    [data-dpr="3"] p {
+      font-size: 48px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>标题</h1>
+    <p>123 456 789 123 456 789 123 456 789 123 456 7</p>
+  </div>
+</body>
+
+</html>

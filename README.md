@@ -5,7 +5,7 @@
 # 目录
 
 * fun：好玩的
-  * 22magicCube：2x2魔方
+  * 22magicCube：2x2魔方
 
 * others：未处理代码
 
@@ -13,7 +13,7 @@
   * rem：rem适配
 * scroll：滚动相关
   * link-nav：滚动联动导航
-  * on-screen：屏幕范围内检测
+  * on-screen：屏幕范围内检测
   * scroll-bar：自定义滚动条
 * sliders：轮播相关
   * one-big-two-small：两小一大手动切换轮播

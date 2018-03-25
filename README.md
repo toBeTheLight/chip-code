@@ -11,6 +11,7 @@
 
 * screen-adaptation：屏幕适配相关
   * rem：rem适配
+  * vw: viewport
 * scroll：滚动相关
   * link-nav：滚动联动导航
   * on-screen：屏幕范围内检测

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>网格布局 grid</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    ul,li {
+      list-style: none;
+    }
+    ul {
+      display: grid;
+      /* 每一行内的布局方式 */
+      font-size: 0;
+    }
+    li {
+      border: 1px solid black;
+      font-size: 20px;
+    }
+    ul.auto-fill {
+      /* auto-fill 填充高度 */
+      grid-template-columns: repeat(auto-fill, 200px);
+      justify-content: space-around;
+    }
+    ul.fr {
+      /* fr 分割剩余空间 */
+      grid-template-columns: 1fr 2fr 350px 3fr;
+    }
+  </style>
+</head>
+<body>
+  <ul class="auto-fill">
+    <li>一段示例文字，一段示例文字</li>
+    <li>一段示例文字，一段示例文字</li>
+    <li>一段示例文字，一段示例文字</li>
+    <li>一段示例文字，一段示例文字</li>
+    <li>一段示例文字，一段示例文字</li>
+    <li>一段示例文字，一段示例文字</li>
+    <li>参见<a href="https://www.w3cplus.com/blog/2352.html">链接</a></li>
+  </ul>
+  <ul class="fr">
+      <li>一段示例文字，一段示例文字</li>
+      <li>一段示例文字，一段示例文字</li>
+      <li>一段示例文字，一段示例文字</li>
+      <li>一段示例文字，一段示例文字</li>
+      <li>一段示例文字，一段示例文字</li>
+      <li>一段示例文字，一段示例文字</li>
+      <li>参见<a href="https://www.w3cplus.com/blog/2352.html">链接</a></li>
+    </ul>
+</body>
+</html>

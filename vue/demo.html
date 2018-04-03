@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>vue的简要原理</h1>
+  <script>
+  var vm = {}
+  // 依赖类
+  function Dep () {
+    // 依赖队列
+    this.subs = []
+  }
+  Dep.target = null
+  // 创建依赖实例
+  let dep = new Dep()
+  let val = 1
+  // 劫持vue实例配置中的值
+  Object.defineProperty(vm, 'a', {
+    get () {
+      // 如果有的话，将此cb加入依赖队列
+      if (Dep.target) {
+        dep.subs.push(Dep.target)
+      }
+      return val
+    },
+    set (val) {
+      val = val
+      // 循环执行依赖队列中的函数
+      for (i of dep.subs) {
+        i()
+      }
+    }
+  })
+  // watcher类的构造过程
+  function watcher() {
+    let cb = () => {
+      console.log('来自计算属性', vm.a)
+    }
+    // 将此依赖函数挂在Dep.target上
+    Dep.target = cb
+    // 执行，那么触发上面劫持的属性的get，会将此cb加入依赖队列
+    cb()
+    // 取消
+    Dep.target = null
+  }
+  watcher()
+  </script>
+</body>
+</html>

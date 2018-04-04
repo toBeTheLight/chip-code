@@ -7,7 +7,8 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>vue的简要原理</h1>
+  <h1>vue的简要原理，以单属性为例子</h1>
+  <p class="msg" v-text="msg"></p>
   <script>
   var vm = {}
   // 依赖类
@@ -16,30 +17,32 @@
     this.subs = []
   }
   Dep.target = null
+
+  // 劫持vue实例配置中的值
   // 创建依赖实例
   let dep = new Dep()
-  let val = 1
-  // 劫持vue实例配置中的值
-  Object.defineProperty(vm, 'a', {
+  let initVal = 'msg'
+  Object.defineProperty(vm, 'msg', {
     get () {
       // 如果有的话，将此cb加入依赖队列
       if (Dep.target) {
         dep.subs.push(Dep.target)
       }
-      return val
+      return initVal
     },
     set (val) {
-      val = val
+      initVal = val
       // 循环执行依赖队列中的函数
-      for (i of dep.subs) {
-        i()
+      for (cb of dep.subs) {
+        cb()
       }
     }
   })
+
   // watcher类的构造过程
   function watcher() {
     let cb = () => {
-      console.log('来自计算属性', vm.a)
+      document.querySelector('.msg').innerText = vm.msg
     }
     // 将此依赖函数挂在Dep.target上
     Dep.target = cb

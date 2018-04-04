@@ -1,3 +1,4 @@
+// 等一系列初始化功能
 function initData (vm, data) {
   for (let key in data) {
     observer(vm, key, data[key])

@@ -22,3 +22,6 @@
   * scroll-bar：自定义滚动条
 * sliders：轮播相关
   * one-big-two-small：两小一大手动切换轮播
+* vue：vue相关
+  * simple：流程简单实现
+  * Vue：主要函数拆分开的简单实现

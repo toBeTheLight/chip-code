@@ -8,7 +8,8 @@
   * 22magicCube：2x2魔方（css+js）/失败
 
 * others：未处理代码
-
+* pwa：pwa相关
+  * demo：一个简单的尝试
 * screen-adaptation：屏幕适配相关
   * rem：rem适配
   * vw： viewport

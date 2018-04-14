@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>PWA</title>
+</head>
+<body>
+  <h1>demo</h1>
+  <p>a pwa demo</p>
+  <p class="network-error hide">当前网络中断，处于离线模式</p>
+  <script>
+  // serviceWorker的注册只能写在html中
+  if ('serviceWorker' in navigator) {           
+    navigator.serviceWorker.register(
+      // serviceWorker配置信息js
+      './service-worker.js', 
+      // 默认serviceWorker只能截获同路径层级下fetch事件，可传入scope修改，若scope比文件所在层级高，则出现以下提示
+      // The path of the provided scope ('/pwa/demo/') is not under the max scope allowed ('/pwa/demo/js/'). 
+      // Adjust the scope, move the Service Worker script, 
+      // or use the Service-Worker-Allowed HTTP header to allow the scope.
+      {scope: './'}
+    )
+      .then(function (registration) {
+      console.log(`ServiceWorker在作用域: ${registration.scope} 注册成功`);
+    }).catch(function (err) {                   
+      console.log('ServiceWorker注册失败:', err);
+    });
+  }
+  let domError = document.querySelector('.network-error')
+  if (!navigator.onLine) {
+    domError.classList.remove('hide')
+    }
+  </script>
+</body>
+</html>

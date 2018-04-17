@@ -22,6 +22,10 @@ export default {
       this.$TryMessageBox({
         title: '消息提示',
         message: '是否提交？'
+      }).then(() => {
+        this.testMethod()
+      }).catch(() => {
+        console.log('err')
       })
     }
   },

@@ -1,0 +1,14 @@
+<transition name="mask">
+  <div class="try-mask" v-show="visiable">
+    <div class="try-alert">
+      <div class="try-alert__title">
+        <h2 v-if="title">{{title}}</h2>
+        <button @click="close">
+          <i>X</i>
+        </button>
+      </div>
+      <p>{{message}}</p>
+      <button @click="close">确定</button>
+    </div>
+  </div>
+</transition>

@@ -1,6 +1,6 @@
 # cmpts
 
-> ui
+移动到[try-ui](https://github.com/toBeTheLight/try-ui)
 
 组件编写学习与练习
 

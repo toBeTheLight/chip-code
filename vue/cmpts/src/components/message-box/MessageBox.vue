@@ -5,7 +5,9 @@
 export default {
   data () {
     return {
-      visiable: false
+      visiable: false,
+      resolve: null,
+      reject: null
     }
   },
   props: {
@@ -17,7 +19,19 @@ export default {
     }
   },
   methods: {
-    close () {
+    confirmHandler () {
+      this.hide()
+      if (typeof this.resolve === 'function') {
+        this.resolve()
+      }
+    },
+    cancelHandler () {
+      this.hide()
+      if (typeof this.reject === 'function') {
+        this.reject()
+      }
+    },
+    hide () {
       this.visiable = false
     },
     show () {

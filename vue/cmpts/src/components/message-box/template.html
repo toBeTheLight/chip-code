@@ -1,14 +1,17 @@
 <transition name="mask">
   <div class="try-mask" v-show="visiable">
-    <div class="try-alert">
-      <div class="try-alert__title">
+    <div class="try-modal">
+      <div class="try-modal__title">
         <h2 v-if="title">{{title}}</h2>
-        <button @click="close">
+        <button @click="hide">
           <i>X</i>
         </button>
       </div>
       <p>{{message}}</p>
-      <button @click="close">确定</button>
+      <div class="try-modal__footer">
+        <TryButton @click="confirmHandler">确定</TryButton>
+        <TryButton @click="cancelHandler">取消</TryButton>
+      </div>
     </div>
   </div>
 </transition>

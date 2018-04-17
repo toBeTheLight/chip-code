@@ -18,9 +18,14 @@ const showMessageBox = ({title, message}) => {
   instance['message'] = message
   document.body.appendChild(instance.$el)
   instance.show()
+  let promise = new Promise((resolve, reject) => {
+    instance.resolve = resolve
+    instance.reject = reject
+  })
+  return promise
 }
 const $MessageBox = (options) => {
-  showMessageBox(options)
+  return showMessageBox(options)
 }
 
 export default $MessageBox

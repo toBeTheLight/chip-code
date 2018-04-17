@@ -14,11 +14,11 @@
   width: 0;
   vertical-align: middle;
 }
-.mask-enter-active .try-alert{
-  animation: fade-in .3s;
+.mask-enter-active .try-modal{
+  animation: fade-in .5s;
 }
-.mask-leave-active .try-alert{
-  animation: fade-out .3s;
+.mask-leave-active .try-modal{
+  animation: fade-out .5s;
 }
 @keyframes fade-in {
   0% {
@@ -40,7 +40,7 @@
     opacity: 0;
   }
 }
-.try-alert {
+.try-modal {
   display: inline-block;
   width: 420px;
   padding: 20px;
@@ -57,5 +57,9 @@
       right: 0;
       top: 0;
     }
+  }
+  &__footer{
+    display: flex;
+    justify-content: flex-end;
   }
 }

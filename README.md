@@ -28,3 +28,4 @@
   * Vue：主要函数拆分开的简单实现
 * user-behavior：用户行为相关
   * time-on-page：页面停留时长统计
+* blockchain：区块链相关

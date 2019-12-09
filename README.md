@@ -10,6 +10,8 @@
 * others：未处理代码
 * pwa：pwa相关
   * demo：一个简单的尝试
+* layout: 布局相关
+  * waterfall 瀑布流
 * screen-adaptation：屏幕适配相关
   * rem：rem适配
   * vw： viewport
